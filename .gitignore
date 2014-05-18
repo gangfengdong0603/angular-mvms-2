@@ -1,0 +1,7 @@
+public/**/*.html
+public/**/*.css
+public/javascripts/*min.js
+release
+*.gz
+views/index.html
+.DS_Store
