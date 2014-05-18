@@ -1,0 +1,90 @@
+
+<div class="modal-header">
+  <h3>视频资源搜索</h3>
+</div>
+<div class="modal-body">
+  <div class="label-input label-group">
+    <select ng-model="search.fee">
+      <option value="-1">所有</option>
+      <option value="0">免费</option>
+      <option value="1">会员</option>
+    </select>
+    <select ng-model="search.o">
+      <option value="-1">专辑周播放数排序</option>
+      <option value="0">视频周播放数排序</option>
+      <option value="1">发布时间</option>
+    </select>
+    <!--select(ng-model="search.all")
+    <option value="-1">全网</option>
+    <option value="0">站内</option>
+    -->
+    <input type="text" placeholder="关键字" ng-model="search.keyword" key-press="button"/>
+    <button ng-click="searchByKey()" class="btn search">查询</button>
+  </div>
+  <div class="label-input label-group">
+    <select ng-model="search.c">
+      <option value="1">非播客视频</option>
+      <option value="2">播客视频</option>
+      <option value="3">电视APP通过专辑id取片花</option>
+    </select>
+    <div class="label-radio horizon">
+      <input type="radio" value="0" ng-model="search.t"/>视频ID
+    </div>
+    <div class="label-radio horizon">
+      <input type="radio" ng-model="search.t" value="1"/>专辑ID
+    </div>
+    <input type="text" style="margin-left: 66px;" placeholder="id" ng-model="search.id" key-press="button"/>
+    <button ng-click="searchById()" class="btn search">查询</button>
+  </div>
+  <div class="label-input label-group">
+    <div class="label-radio horizon">
+      <input type="radio" value="0" ng-model="search.isUrl"/>视频URL
+    </div>
+    <div class="label-radio horizon">
+      <input type="radio" value="1" ng-model="search.isUrl"/>专辑URL
+    </div>
+    <input type="text" style="margin-left: 39px;" placeholder="url" ng-model="search.url" key-press="button" class="double"/>
+    <button ng-click="searchByUrl()" class="btn search">查询</button>
+    <div ng-show="list &amp;&amp; list.length" class="results">
+      <table>
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>频道ID</th>
+            <th>专辑ID</th>
+            <th>老专辑ID</th>
+            <th>视频ID</th>
+            <th>老视频ID</th>
+            <th>视频名称</th>
+            <th>专辑名称</th>
+            <th>类型</th>
+            <th>预览</th>
+            <th>&nbsp;</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr ng-repeat="video in list">
+            <td ng-bind="$index+1"></td>
+            <td ng-bind="video.cid"></td>
+            <td ng-bind="video.aid"></td>
+            <td ng-bind="video.sid"></td>
+            <td ng-bind="video.vid"></td>
+            <td ng-bind="video.old_vid"></td>
+            <td ng-bind="video.video_name"></td>
+            <td ng-bind="video.album_name"></td>
+            <td ng-show="video.type == 0 &amp;&amp; video.vid &gt; 0">单视频</td>
+            <td ng-show="video.type !=0 || video.vid &lt;= 0">专辑</td>
+            <td ng-hide="video.tv_url"><a href="javascript: void(0);">无</a></td>
+            <td ng-show="video.tv_url"><a target="_blank" ng-href="{{video.tv_url}}">预览</a></td>
+            <td>
+              <button ng-click="recommend($index)" class="btn">推荐</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+<div class="modal-footer">
+  <button ng-click="cancel()" class="btn">取消</button>
+</div>

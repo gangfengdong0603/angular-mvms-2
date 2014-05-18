@@ -1,0 +1,28 @@
+
+<ul ng-show="plats">
+  <li ng-class="{active: plat.active}" ng-repeat="plat in plats.slice(0, platInit)" ng-click="activeNav(plats, $index)"><a href="#" ng-bind="plat.name" ng-class="{error: plat.error}"></a></li>
+  <li ng-hide="plats.length-1 &lt; platInit" class="more"><span>...</span>
+    <ul>
+      <li ng-repeat="plat in plats.slice(platInit)" ng-click="activeNav(plats, $index+platInit)"><a href="#" ng-bind="plat.name"></a></li>
+    </ul>
+  </li>
+  <li title="调整位置" ng-click="swapPlat(listProvider)" class="config">&hArr;</li>
+  <li ng-repeat="a in adds" ng-class="{first: $index == 0}" class="adds"> <a href="#" ng-click="add($index)">+ {{ a.name }}</a></li>
+</ul>
+<script type="text/ng-template" id="swapPlat.html">
+  <div class="modal-header">
+    <h3>调整平台位置</h3>
+  </div>
+  <div class="modal-body">
+    <div style="position: relative;">
+      <ul>
+        <li ng-repeat="plat in plats" sortable="sortable" style="height: 16px;" class="platNode">{{plat.name}}</li>
+      </ul>
+      <div style="z-index: -1;" class="index-box"><i ng-repeat="item in plats" ng-bind="$index+1" class="index"></i></div>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button ng-click="cancel()" class="btn yellow">取消</button>
+    <button ng-click="save()" class="btn blue">保存</button>
+  </div>
+</script>

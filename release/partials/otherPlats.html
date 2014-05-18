@@ -1,0 +1,20 @@
+
+<div class="modal-header">
+  <h3>应用到其他平台</h3>
+</div>
+<div class="modal-body">
+  <div>
+    <div class="label-input label-text label-radio horizon">
+      <input type="checkbox" ng-click="all(other_plats)"/>全部
+    </div>
+  </div>
+  <div>
+    <div ng-repeat="plat in other_plats" class="label-input label-text label-radio horizon">
+      <input type="checkbox" ng-model="plat.checked"/>{{ plat.name }}
+    </div>
+  </div>
+</div>
+<div class="modal-footer">
+  <button ng-click="cancel()" class="btn yellow">取消</button>
+  <button ng-click="ok()" class="btn blue">确定</button>
+</div>
